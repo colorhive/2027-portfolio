@@ -6,6 +6,7 @@
   --blue: #3c64b1;
   --gold: #f6cb2f;
   --thanks: #ffd84d;
+  --sunflower-color: #f6cb2f;
   --font: "Montserrat", "Avenir Next", "Helvetica Neue", sans-serif;
   --serif: "Libre Baskerville", "Rockwell", "Palatino", serif;
   --pad: clamp(28px, 6vw, 92px);
@@ -16,10 +17,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
+  height: 100%;
+  overflow: hidden;
   margin: 0;
   color: var(--ink);
   background: #fff;
@@ -29,6 +33,10 @@ body {
 
 img {
   max-width: 100%;
+}
+
+main {
+  height: 100%;
 }
 
 a {
@@ -103,18 +111,12 @@ a:hover {
   display: block;
 }
 
-.photo-sunflower img {
-  position: absolute;
-  width: auto;
-  height: 135%;
-  max-width: none;
-  left: 0;
-  top: -22%;
-  object-fit: cover;
-}
-
 .swatch {
   background: var(--swatch, var(--gold));
+}
+
+.photo-sunflower {
+  background: var(--sunflower-color);
 }
 
 .copy {
@@ -155,6 +157,147 @@ h1,
   margin: 18px 0 0;
   font-size: 16px;
   font-weight: 700;
+}
+
+.intro {
+  margin: 32px 0 0;
+  max-width: 660px;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.32;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+}
+
+.hero .photo {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.sunflower-color,
+.sunflower-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sunflower-video {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+
+.sunflower-color {
+  background: var(--sunflower-color);
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+
+[data-scene="color"] .sunflower-color,
+[data-scene="video"] .sunflower-video {
+  opacity: 1;
+}
+
+.sunflower-trigger {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.sunflower-trigger:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sunflower-color,
+  .sunflower-video {
+    transition: none;
+  }
+}
+
+.hero-copy {
+  justify-content: space-between;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(30px, 4vw, 58px) clamp(28px, 5vw, 74px);
+  background: #fffdeb;
+}
+
+.hero-name {
+  margin: 0;
+  align-self: flex-end;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 32px);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: right;
+  text-transform: none;
+}
+
+.hero-intro {
+  width: 100%;
+  max-width: 680px;
+  margin: auto 0;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(64px, 7vw, 100px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.hero .intro {
+  max-width: 650px;
+  margin-top: 24px;
+  font-size: clamp(24px, 2.7vw, 38px);
+  line-height: 1.32;
+}
+
+.home-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding-bottom: 0;
+  font-family: var(--font);
+  font-size: clamp(14px, 1.2vw, 19px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.home-menu a {
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 5px 12px rgb(0 0 0 / 8%);
+  white-space: nowrap;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.home-menu a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 12%);
+  text-decoration: none;
 }
 
 .signature {
@@ -479,17 +622,39 @@ h1,
     grid-template-columns: 1fr;
   }
 
+  .hero.split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .hero .photo,
+  .hero .hero-copy {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .hero .hero-copy {
+    padding: clamp(24px, 4vw, 40px);
+  }
+
+  .copy {
+    justify-content: center;
+  }
+
+  .hero .hero-copy {
+    justify-content: space-between;
+  }
+
+  .home-menu {
+    margin-top: 56px;
+  }
+
+  .hero .home-menu {
+    margin-top: 28px;
+  }
+
   .photo,
   .swatch {
     min-height: 42vh;
-  }
-
-  .photo-sunflower img {
-    position: static;
-    width: 100%;
-    height: 42vh;
-    object-fit: cover;
-    object-position: center 30%;
   }
 
   .copy,
@@ -517,6 +682,51 @@ h1,
 
   .discipline {
     margin-top: 40px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero.split {
+    display: block;
+  }
+
+  .hero .photo {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .hero .hero-copy {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: auto;
+    padding: 16px 24px 20px;
+    background: rgb(255 253 235 / 95%);
+  }
+
+  .hero-name {
+    font-size: 17px;
+  }
+
+  .hero-intro {
+    margin: 14px 0 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(44px, 11vw, 64px);
+  }
+
+  .hero .intro {
+    margin-top: 10px;
+    font-size: clamp(16px, 4.5vw, 22px);
+    line-height: 1.25;
+  }
+
+  .hero .home-menu {
+    margin-top: 14px;
   }
 }
 
